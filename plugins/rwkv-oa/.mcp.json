@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "oa_plugin": {
+      "type": "http",
+      "url": "https://mcp.oa.rwkvos.com/mcp",
+      "bearer_token_env_var": "RWKV_OA_TOKEN"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "rwkv-code-review",
+  "version": "0.1.0",
+  "description": "审查代码变更中的可复现问题，提供定位、影响和修复建议。",
+  "author": {
+    "name": "RWKV"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "RWKV 代码审查",
+    "shortDescription": "审查代码变更中的可复现问题，提供定位、影响和修复建议。",
+    "longDescription": "审查代码变更中的可复现问题，提供定位、影响和修复建议。",
+    "developerName": "RWKV",
+    "category": "Productivity",
+    "capabilities": [
+      "Read"
+    ],
+    "defaultPrompt": [
+      "使用 $rwkv-code-review 审查当前未提交的代码变更。"
+    ]
+  }
+}

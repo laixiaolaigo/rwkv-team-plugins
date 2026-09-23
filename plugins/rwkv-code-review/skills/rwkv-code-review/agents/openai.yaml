@@ -1,0 +1,6 @@
+interface:
+  display_name: "RWKV 代码审查"
+  short_description: "审查代码变更中的可复现问题，给出文件定位、影响和修复建议"
+  default_prompt: "使用 $rwkv-code-review 审查当前未提交改动，按严重程度列出有证据的问题。"
+policy:
+  allow_implicit_invocation: true

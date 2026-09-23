@@ -1,0 +1,6 @@
+interface:
+  display_name: "RWKV 更新说明"
+  short_description: "根据实际 Git 变更整理版本更新、迁移事项和可追溯的验证记录"
+  default_prompt: "使用 $rwkv-release-notes 根据我指定的 Git 范围生成有证据的更新说明。"
+policy:
+  allow_implicit_invocation: true

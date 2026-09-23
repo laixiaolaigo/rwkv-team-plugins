@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+*.local.json
+*.local.toml
+*.pem
+*.key
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+Thumbs.db
+work/
