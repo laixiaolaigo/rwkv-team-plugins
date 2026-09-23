@@ -17,14 +17,14 @@
 源码仓库：[laixiaolaigo/rwkv-team-plugins](https://github.com/laixiaolaigo/rwkv-team-plugins)。在 PowerShell 中添加市场：
 
 ```powershell
-codex plugin marketplace add git@github.com:laixiaolaigo/rwkv-team-plugins.git --ref main
+codex plugin marketplace add https://github.com/laixiaolaigo/rwkv-team-plugins.git --ref main
 codex plugin marketplace list
 
 # 按需执行下面的安装命令
 codex plugin add rwkv-oa@rwkv-team
 ```
 
-私有仓库使用成员本机已有的 Git 认证；若 HTTPS 未配置访问权限，可使用团队提供的 SSH 克隆地址。不要把 Git 访问凭据写进 URL 或市场文件。
+默认使用 HTTPS，避免安装过程依赖 SSH 密钥和 22 端口。私有仓库仍需要成员具备访问权限并配置 Git 认证。不要把 Git 访问凭据写进 URL 或市场文件。
 
 本地开发时，也可以在克隆后的仓库根目录执行本地注册：
 
@@ -33,6 +33,31 @@ codex plugin marketplace add .
 ```
 
 市场名称唯一。本机若先注册过这个本地市场，之后要切换到 Git 来源，可先执行 `codex plugin marketplace remove rwkv-team`，再添加远程地址。这是替换市场来源，不是修改插件文件。
+
+### 添加市场时 SSH 连接失败
+
+如果看到 `Connection closed ... port 22` 和 `Could not read from remote repository`，说明 Git 的 SSH 连接未成功建立，尚未读取插件市场配置。常见原因包括网络、防火墙或代理对 SSH 连接的限制；该错误本身不能证明仓库权限不足。
+
+先用 HTTPS 检查仓库可达性，再执行本页的 HTTPS 添加命令：
+
+```shell
+git ls-remote https://github.com/laixiaolaigo/rwkv-team-plugins.git refs/heads/main
+```
+
+如果 `codex plugin marketplace list` 中已存在使用 SSH 来源的 `rwkv-team`，先移除这个市场来源，再以 HTTPS 注册：
+
+```shell
+codex plugin marketplace remove rwkv-team
+codex plugin marketplace add https://github.com/laixiaolaigo/rwkv-team-plugins.git --ref main
+```
+
+如果 HTTPS 命令仍报告 SSH 的 22 端口错误，检查本机是否配置了 URL 自动改写：
+
+```shell
+git config --show-origin --get-regexp '^url\..*\.insteadof$'
+```
+
+如果团队必须使用 SSH，可先测试 `ssh -T -p 443 git@ssh.github.com`。测试通过后可使用 `ssh://git@ssh.github.com:443/laixiaolaigo/rwkv-team-plugins.git` 作为市场地址；这仍要求有效的 GitHub SSH 认证。参见 [GitHub：通过 HTTPS 端口使用 SSH](https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port)。
 
 ## RWKV OA 认证
 
@@ -78,7 +103,7 @@ codex plugin add rwkv-oa@rwkv-team
 克隆团队仓库进行维护，市场跟踪分支为 `main`：
 
 ```powershell
-git clone git@github.com:laixiaolaigo/rwkv-team-plugins.git
+git clone https://github.com/laixiaolaigo/rwkv-team-plugins.git
 cd rwkv-team-plugins
 python scripts/check_marketplace.py
 ```
