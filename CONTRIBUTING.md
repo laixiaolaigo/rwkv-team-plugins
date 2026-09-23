@@ -5,7 +5,7 @@
 ## 添加一个只包含 skill 的插件
 
 1. 在 `plugins/` 下创建以小写字母和连字符命名的目录，例如 `rwkv-docs`。
-2. 参考 `rwkv-code-review` 创建 `.codex-plugin/plugin.json`，修改 `name`、描述、显示名称、默认提示和版本。名称必须与目录及市场条目一致。
+2. 参考 `rwkv-oa/.codex-plugin/plugin.json` 创建自己的插件清单，修改 `name`、描述、显示名称、默认提示和版本。只包含 skill 的插件应省略 `mcpServers`，并在 skill 的界面配置中省略 MCP `dependencies`。名称必须与目录及市场条目一致。
 3. 在 `skills/rwkv-docs/SKILL.md` 的 YAML 头部写入 `name`、`description`，正文写明工作流、实际能力与结果要求。不要把团队尚未确定的约定写成强制规则。
 4. 创建 `skills/rwkv-docs/agents/openai.yaml`，配置显示名称、短描述和包含 `$rwkv-docs` 的默认提示。
 5. 将下面的条目追加到 `.agents/plugins/marketplace.json` 的 `plugins` 数组中。数组顺序就是市场展示顺序。

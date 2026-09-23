@@ -7,8 +7,6 @@
 | 插件 ID | 界面名称 | 内容 | 额外配置 |
 | --- | --- | --- | --- |
 | `rwkv-oa` | RWKV OA | OA 身份及办公信息查询、已授权操作；实际能力取决于 MCP 权限 | 每位成员自己的 `RWKV_OA_TOKEN` |
-| `rwkv-code-review` | RWKV 代码审查 | 审查指定代码变更，报告有证据的问题 | 无；在代码仓库中使用 |
-| `rwkv-release-notes` | RWKV 更新说明 | 从指定 Git 范围生成更新说明草稿 | 无；在代码仓库中使用 |
 
 “预置”表示这些插件已随仓库提供并列入市场。添加市场后，成员仍可按需安装；不会自动启用全部插件。
 
@@ -16,22 +14,19 @@
 
 需要已安装支持 `codex plugin` 命令的 Codex。本仓库的 CLI 结构检查使用 `codex-cli 0.154.0`；其他版本以实际命令支持为准。
 
-远程仓库建立后，在 PowerShell 中输入它的真实克隆地址：
+源码仓库：[laixiaolaigo/rwkv-team-plugins](https://github.com/laixiaolaigo/rwkv-team-plugins)。在 PowerShell 中添加市场：
 
 ```powershell
-$marketRepoUrl = Read-Host '团队插件市场的 Git 克隆地址'
-codex plugin marketplace add $marketRepoUrl --ref main
+codex plugin marketplace add git@github.com:laixiaolaigo/rwkv-team-plugins.git --ref main
 codex plugin marketplace list
 
 # 按需执行下面的安装命令
 codex plugin add rwkv-oa@rwkv-team
-codex plugin add rwkv-code-review@rwkv-team
-codex plugin add rwkv-release-notes@rwkv-team
 ```
 
 私有仓库使用成员本机已有的 Git 认证；若 HTTPS 未配置访问权限，可使用团队提供的 SSH 克隆地址。不要把 Git 访问凭据写进 URL 或市场文件。
 
-仓库尚未上传时，也可以在本仓库根目录执行本地注册：
+本地开发时，也可以在克隆后的仓库根目录执行本地注册：
 
 ```powershell
 codex plugin marketplace add .
@@ -61,11 +56,9 @@ macOS/Linux 用户可通过自己的进程环境管理方式设置同名变量�
 
 ```text
 $rwkv-oa 我是谁？
-$rwkv-code-review 审查当前未提交改动，重点关注权限和数据一致性。
-$rwkv-release-notes 根据 v1.2.0 到 v1.3.0 的差异生成更新说明。
 ```
 
-最后一个示例里的标签必须在当前项目中真实存在；请替换成自己的版本范围。客户端可能显示带插件前缀的 skill 名称，以候选项实际名称为准。
+客户端可能显示带插件前缀的 skill 名称，以候选项实际名称为准。
 
 ## 维护和更新
 
@@ -80,17 +73,17 @@ codex plugin add rwkv-oa@rwkv-team
 
 发布插件改动时更新该插件 `.codex-plugin/plugin.json` 中的版本号，提交并推送到市场跟踪的分支。安装后新建任务以加载更新。增加插件的步骤见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-## 上传到新 Git 仓库
+## 获取源码并提交更新
 
-本地目录已初始化为 Git 仓库，分支为 `main`。在 Git 平台创建空仓库后，在这个目录执行：
+克隆团队仓库进行维护，市场跟踪分支为 `main`：
 
 ```powershell
-$marketRepoUrl = Read-Host '新建空仓库的 Git 克隆地址'
-git remote add origin $marketRepoUrl
-git push -u origin main
+git clone git@github.com:laixiaolaigo/rwkv-team-plugins.git
+cd rwkv-team-plugins
+python scripts/check_marketplace.py
 ```
 
-远程若已包含 README 或其他提交，应先查看远程历史并合并；不要用强制推送覆盖它。
+修改后检查差异、提交，并通过团队约定的分支或 PR 流程合并到 `main`。
 
 ## 布局
 

@@ -1,7 +1,7 @@
 {
   "name": "rwkv-team",
   "interface": {
-    "displayName": "RWKV \u56e2\u961f\u63d2\u4ef6\u5e02\u573a"
+    "displayName": "RWKV 团队插件市场"
   },
   "plugins": [
     {
@@ -9,30 +9,6 @@
       "source": {
         "source": "local",
         "path": "./plugins/rwkv-oa"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    },
-    {
-      "name": "rwkv-code-review",
-      "source": {
-        "source": "local",
-        "path": "./plugins/rwkv-code-review"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    },
-    {
-      "name": "rwkv-release-notes",
-      "source": {
-        "source": "local",
-        "path": "./plugins/rwkv-release-notes"
       },
       "policy": {
         "installation": "AVAILABLE",
