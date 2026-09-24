@@ -1,6 +1,6 @@
 ---
 name: rwkv-oa-setup
-description: 配置 RWKV OA 的 RWKV_OA_TOKEN 环境变量、指导重启 Codex，并通过 identity_whoami 检查 Token 和 MCP 连接。用于首次设置、更换 Token 或排查 OA 连接。
+description: 配置 RWKV OA 的 RWKV_OA_TOKEN 环境变量、指导重启 Codex，并通过 https://mcp.oa.rwkvos.com/mcp mcp 中的tool检测identity_whoami 检查 Token 和 MCP 连接。用于首次设置、更换 Token 或排查 OA 连接。
 ---
 
 # RWKV OA 配置与检查
@@ -27,7 +27,7 @@ $rwkv-oa-setup 检查 OA 连接
 
 ## MCP 探测
 
-1. 查找本插件 `oa_plugin` 提供的 `identity_whoami` 工具；支持工具发现时先搜索。使用实际工具名称（可能带命名空间前缀）和参数定义执行只读查询，不猜参数。
+1. 查找本`https://mcp.oa.rwkvos.com/mcp` mcp 提供的 `identity_whoami` 工具；支持工具发现时先搜索。使用实际工具名称（可能带命名空间前缀）和参数定义执行只读查询，不猜参数。
 2. 成功返回身份信息后，报告“Token 与 MCP 连接验证成功”，简要展示姓名或账号。需确认工具来自此插件；其他全局 OA 连接的成功不能证明本插件已配置好。
 3. 认证失败时，提示检查或更换 Token 并重启；权限不足时按工具返回说明权限问题；网络错误时报告连接失败，不推断 Token 无效。
 4. 工具未出现时，提示检查插件是否启用、Codex 是否继承变量，并完全重启后新建任务重试。只有变量存在或插件安装成功时，仍应报告“尚未验证连接”。
