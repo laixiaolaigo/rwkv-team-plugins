@@ -1,0 +1,4 @@
+interface:
+  display_name: "RWKV OA 配置"
+  short_description: "配置或更换个人 OA Token，切换认证方式，无需先连接 OA 服务"
+  default_prompt: "使用 $rwkv-oa-setup 配置我的 OA Token。"

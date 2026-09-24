@@ -1,6 +1,6 @@
 {
   "name": "rwkv-oa",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "通过 OA 工具查询个人资料和办公信息，处理已授权事务。",
   "author": {
     "name": "RWKV"
