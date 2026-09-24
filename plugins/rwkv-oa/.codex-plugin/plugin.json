@@ -1,6 +1,6 @@
 {
   "name": "rwkv-oa",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "description": "通过 OA 工具查询个人资料和办公信息，处理已授权事务。",
   "author": {
     "name": "RWKV"
@@ -17,7 +17,7 @@
       "Write"
     ],
     "defaultPrompt": [
-      "使用 $rwkv-oa 查询我是谁。"
+      "使用 RWKV OA 查询我是谁。"
     ]
   },
   "mcpServers": "./.mcp.json"
